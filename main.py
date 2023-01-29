@@ -1,10 +1,10 @@
 import os
 import random
 import string
-import tkinter as tk
-from tkinter import messagebox
-import netifaces as net
 import winreg
+import netifaces
+import tkinter
+from tkinter import messagebox
 
 
 def get_values(key):
@@ -21,7 +21,7 @@ def get_values(key):
 
 
 def get_correct_interface():
-    current_interface = net.gateways()['default'][net.AF_INET][1]
+    current_interface = netifaces.gateways()['default'][netifaces.AF_INET][1]
     print(current_interface)
 
     with winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE) as hkey:
@@ -81,15 +81,15 @@ def undo_spoof():
         os.system("shutdown /r /t 0")
 
 
-root = tk.Tk()
+root = tkinter.Tk()
 
 root.title("<3")
 root.geometry("200x100+50+50")
 root.resizable(False, False)
 
-main_text = tk.Message(root, text="I am awaiting your command...", width=200)
-spoof = tk.Button(root, text="Spoof Mac Address", command=spoof_mac)
-undo = tk.Button(root, text="Set Back To Default", command=undo_spoof)
+main_text = tkinter.Message(root, text="I am awaiting your command...", width=200)
+spoof = tkinter.Button(root, text="Spoof Mac Address", command=spoof_mac)
+undo = tkinter.Button(root, text="Set Back To Default", command=undo_spoof)
 
 main_text.pack()
 spoof.pack()
