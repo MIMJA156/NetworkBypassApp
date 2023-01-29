@@ -72,7 +72,12 @@ def undo_spoof():
         print("No Interface")
         return
 
-    winreg.DeleteValue(sub_key, "NetworkAddress")
+    try:
+        winreg.DeleteValue(sub_key, "NetworkAddress")
+    except WindowsError:
+        messagebox.showinfo(title="<3", message="There Are No Changes To Undo.\nSpoof Is Not Currently Active.")
+        return
+
     winreg.CloseKey(sub_key)
 
     response = messagebox.askyesno(title="Restart?",
