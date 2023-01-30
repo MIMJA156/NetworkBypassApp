@@ -59,7 +59,7 @@ def spoof_mac():
     winreg.SetValueEx(sub_key, "NetworkAddress", 0, winreg.REG_SZ, f"DE{''.join(random.choices(string.ascii_lowercase + string.digits, k=10))}")
     winreg.CloseKey(sub_key)
 
-    response = messagebox.askyesno(title="Restart?",
+    response = messagebox.askyesno(title="<3",
                                    message="Your PC Needs To Restart For The Changes To Take Affect.\nRestart Now?")
     if response:
         os.system("shutdown /r /t 0")
@@ -80,7 +80,7 @@ def undo_spoof():
 
     winreg.CloseKey(sub_key)
 
-    response = messagebox.askyesno(title="Restart?",
+    response = messagebox.askyesno(title="<3",
                                    message="Your PC Needs To Restart For The Changes To Take Affect.\nRestart Now?")
     if response:
         os.system("shutdown /r /t 0")
@@ -89,15 +89,12 @@ def undo_spoof():
 root = tkinter.Tk()
 
 root.title("<3")
-root.geometry("200x100+50+50")
+root.geometry("400x200+50+50")
 root.resizable(False, False)
 
-main_text = tkinter.Message(root, text="I am awaiting your command...", width=200)
-spoof = tkinter.Button(root, text="Spoof Mac Address", command=spoof_mac)
-undo = tkinter.Button(root, text="Set Back To Default", command=undo_spoof)
-
-main_text.pack()
-spoof.pack()
-undo.pack()
+tkinter.Label(root, text="I am awaiting your command...", width=200, font=("default", 15)).pack(pady=20)
+tkinter.Button(root, text="Spoof Mac Address", command=spoof_mac, font=("default", 10)).pack(pady=5)
+tkinter.Button(root, text="Set Back To Default", command=undo_spoof, font=("default", 10)).pack(pady=5)
+tkinter.Label(root, text="v 1.0.0").pack(side="bottom")
 
 root.mainloop()
